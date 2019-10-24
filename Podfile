@@ -4,8 +4,9 @@
 target 'AppDevHistogram' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
+  platform :ios, '11.0'
 
   # Pods for AppDevHistogram
-  pod 'SnapKit'
+  pod 'SnapKit', '~> 4.2.0'
 
 end
