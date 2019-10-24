@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "AppDevHistogram"
-  spec.version      = "0.0.1"
+  spec.version      = "0.0.2"
   spec.summary      = "A reusable histogram view."
 
   # This description is used to generate tags and improve search results.
@@ -25,8 +25,10 @@ Pod::Spec.new do |spec|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   spec.description  = <<-DESC
-    A reusable histogram view.
+    A reusable histogram view which allows for user interaction.
                    DESC
+
+  spec.homepage     = "https://github.com/cuappdev/appdev-histogram"
 
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
