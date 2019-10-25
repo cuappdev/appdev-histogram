@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "AppDevHistogram"
-  spec.version      = "0.0.6"
+  spec.version      = "0.0.7"
   spec.summary      = "A reusable histogram view."
 
   # This description is used to generate tags and improve search results.
