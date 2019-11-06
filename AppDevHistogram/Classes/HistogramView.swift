@@ -323,7 +323,6 @@ private class BarContainerView: UIView {
         super.init(frame: frame)
 
         barView.isUserInteractionEnabled = false
-        barView.backgroundColor = .histogramBarBlue
         barView.layer.cornerRadius = 3
         barView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
 
@@ -339,6 +338,9 @@ private class BarContainerView: UIView {
         // clamp heightFactor to the range [0, 1]
         let clampedHeightFactor = max(0, min(1, heightFactor))
         setUpConstraints(heightFactor: clampedHeightFactor)
+
+        self.defaultColor = defaultColor
+        self.highlightedColor = highlightedColor
         barView.backgroundColor = defaultColor
     }
 

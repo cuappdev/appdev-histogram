@@ -18,12 +18,6 @@ extension UIColor {
         return UIColor(red: red, green: green, blue: blue, alpha: 1)
     }
 
-    /// 0x4A90E2
-    static let eateryBlue = colorFromCode(0x4A90E2)
-
-    /// 0xb7d3f3
-    static let histogramBarBlue = colorFromCode(0xb7d3f3)
-
     /// 0xE1E1E1
     static let inactive = colorFromCode(0xE1E1E1)
 
