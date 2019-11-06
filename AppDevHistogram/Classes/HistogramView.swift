@@ -22,7 +22,7 @@ public protocol HistogramViewDataSource: AnyObject {
 
 public class HistogramView: UIView {
 
-    weak var dataSource: HistogramViewDataSource?
+    public weak var dataSource: HistogramViewDataSource?
 
     /// The bottom line that extends along the bottom across the width of the
     /// histogram
