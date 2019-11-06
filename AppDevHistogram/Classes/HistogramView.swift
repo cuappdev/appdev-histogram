@@ -183,6 +183,8 @@ public class HistogramView: UIView {
                 make.leading.equalTo(barContainerView)
                 make.top.bottom.equalToSuperview()
             }
+
+            tickLabelViews.append(tickLabel)
         }
     }
 
@@ -211,8 +213,8 @@ public class HistogramView: UIView {
         }
     }
 
-    // move the tag and highlight the correct bar
-    func selectBar(at index: Int, animated: Bool, generateFeedback: Bool) {
+    // Move the tag and highlight the correct bar
+    public func selectBar(at index: Int, animated: Bool, generateFeedback: Bool) {
         moveTag(toBarViewAt: index, animated: animated, generateFeedback: generateFeedback)
         highlightBarView(at: index, animated: animated)
     }
