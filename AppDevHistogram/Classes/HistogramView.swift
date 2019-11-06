@@ -9,7 +9,7 @@
 import SnapKit
 import UIKit
 
-protocol HistogramViewDataSource: AnyObject {
+public protocol HistogramViewDataSource: AnyObject {
 
     func numberOfDataPoints(for histogramView: HistogramView) -> Int
     func histogramView(_ histogramView: HistogramView, relativeValueOfDataPointAt index: Int) -> Double
@@ -20,7 +20,7 @@ protocol HistogramViewDataSource: AnyObject {
 
 }
 
-class HistogramView: UIView {
+public class HistogramView: UIView {
 
     weak var dataSource: HistogramViewDataSource?
 
@@ -293,7 +293,7 @@ class HistogramView: UIView {
 
 extension HistogramView: UIGestureRecognizerDelegate {
 
-    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    override public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         guard let panGesture = gestureRecognizer as? UIPanGestureRecognizer else {
             return super.gestureRecognizerShouldBegin(gestureRecognizer)
         }
