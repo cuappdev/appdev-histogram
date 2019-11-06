@@ -113,7 +113,7 @@ public class HistogramView: UIView {
         addGestureRecognizer(tapGestureRecognizer)
     }
 
-    func reloadData() {
+    public func reloadData() {
         tearDownBars()
         setUpBars()
 
