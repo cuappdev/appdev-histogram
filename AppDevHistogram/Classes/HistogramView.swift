@@ -11,6 +11,8 @@ import UIKit
 
 public protocol HistogramViewDataSource: AnyObject {
 
+    func defaultBarColor(for histogramView: HistogramView) -> UIColor
+    func highlightedBarColor(for histogramView: HistogramView) -> UIColor
     func numberOfDataPoints(for histogramView: HistogramView) -> Int
     func histogramView(_ histogramView: HistogramView, relativeValueOfDataPointAt index: Int) -> Double
     func histogramView(_ histogramView: HistogramView, descriptionForDataPointAt index: Int) -> NSAttributedString?
@@ -136,7 +138,9 @@ public class HistogramView: UIView {
             let barContainerView = BarContainerView()
 
             let heightFactor = dataSource.histogramView(self, relativeValueOfDataPointAt: i)
-            barContainerView.configure(heightFactor: heightFactor)
+            let defaultBarColor = dataSource.defaultBarColor(for: self)
+            let highlightedBarColor = dataSource.highlightedBarColor(for: self)
+            barContainerView.configure(heightFactor: heightFactor, defaultColor: defaultBarColor, highlightedColor: highlightedBarColor)
 
             addSubview(barContainerView)
             barContainerView.snp.makeConstraints { make in
@@ -308,6 +312,9 @@ private class BarContainerView: UIView {
 
     private let barView = UIView()
 
+    private var defaultColor: UIColor!
+    private var highlightedColor: UIColor!
+
     var barViewTop: ConstraintItem {
         return barView.snp.top
     }
@@ -328,10 +335,11 @@ private class BarContainerView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(heightFactor: Double) {
+    func configure(heightFactor: Double, defaultColor: UIColor, highlightedColor: UIColor) {
         // clamp heightFactor to the range [0, 1]
         let clampedHeightFactor = max(0, min(1, heightFactor))
         setUpConstraints(heightFactor: clampedHeightFactor)
+        barView.backgroundColor = defaultColor
     }
 
     private func setUpConstraints(heightFactor: Double) {
@@ -344,7 +352,7 @@ private class BarContainerView: UIView {
 
     func setHighlighted(_ isHighlighted: Bool, animated: Bool) {
         let actions: (() -> Void) = {
-            self.barView.backgroundColor = isHighlighted ? .eateryBlue : .histogramBarBlue
+            self.barView.backgroundColor = isHighlighted ? self.highlightedColor : self.defaultColor
         }
 
         if animated {
