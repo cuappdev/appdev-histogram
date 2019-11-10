@@ -221,9 +221,9 @@ public class HistogramView: UIView {
     }
 
     // Move the tag and highlight the correct bar
-    public func selectBar(at index: Int, animated: Bool, generateFeedback: Bool) {
+    public func selectBar(at index: Int, animated: Bool, generateFeedback: Bool, force: Bool = false) {
         delegate?.histogramView(self, didChangeIndex: index)
-        moveTag(toBarViewAt: index, animated: animated, generateFeedback: generateFeedback)
+        moveTag(toBarViewAt: index, animated: animated, generateFeedback: generateFeedback, force: force)
         highlightBarView(at: index, animated: animated)
     }
 
@@ -246,8 +246,8 @@ public class HistogramView: UIView {
         }
     }
 
-    private func moveTag(toBarViewAt index: Int, animated: Bool, generateFeedback: Bool) {
-        guard 0 <= index, index < barContainerViews.count, selectedBarIndex != index else {
+    private func moveTag(toBarViewAt index: Int, animated: Bool, generateFeedback: Bool, force: Bool) {
+        guard force || (0 <= index && index < barContainerViews.count && selectedBarIndex != index) else {
             return
         }
 
