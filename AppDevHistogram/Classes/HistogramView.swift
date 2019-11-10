@@ -11,15 +11,15 @@ import UIKit
 
 public protocol HistogramViewDataSource: AnyObject {
 
-    func defaultBarColor(for histogramView: HistogramView) -> UIColor
-    func highlightedBarColor(for histogramView: HistogramView) -> UIColor
     func numberOfDataPoints(for histogramView: HistogramView) -> Int
     func histogramView(_ histogramView: HistogramView, relativeValueOfDataPointAt index: Int) -> Double
     func histogramView(_ histogramView: HistogramView, descriptionForDataPointAt index: Int) -> NSAttributedString?
-
     func numberOfDataPointsPerTickMark(for histogramView: HistogramView) -> Int?
     func histogramView(_ histogramView: HistogramView, titleForTickMarkAt index: Int) -> String?
 
+    func defaultBarColor(for histogramView: HistogramView) -> UIColor
+    func highlightedBarColor(for histogramView: HistogramView) -> UIColor
+    func font(for histogramView: HistogramView) -> UIFont
 }
 
 public protocol HistogramViewDelegate: AnyObject {
@@ -182,6 +182,7 @@ public class HistogramView: UIView {
 
         for (i, barContainerView) in barContainerViews.enumerated() where i % pointsPerTick == 0 {
             let tickLabel = TickLabelView()
+            tickLabel.configure(for: dataSource.font(for: self))
             let title = dataSource.histogramView(self, titleForTickMarkAt: i) ?? ""
             tickLabel.configure(title: title)
 
@@ -400,6 +401,10 @@ private class TickLabelView: UIView {
             make.top.equalTo(tickMark.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
+    }
+
+    func configure(for font: UIFont) {
+        titleLabel.font = font
     }
 
     required init?(coder: NSCoder) {
