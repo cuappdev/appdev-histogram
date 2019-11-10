@@ -22,9 +22,16 @@ public protocol HistogramViewDataSource: AnyObject {
 
 }
 
+public protocol HistogramViewDelegate: AnyObject {
+
+    func histogramView(_ histogramView: HistogramView, didChangeIndex index: Int)
+
+}
+
 public class HistogramView: UIView {
 
     public weak var dataSource: HistogramViewDataSource?
+    public weak var delegate: HistogramViewDelegate?
 
     /// The bottom line that extends along the bottom across the width of the
     /// histogram
@@ -215,6 +222,7 @@ public class HistogramView: UIView {
 
     // Move the tag and highlight the correct bar
     public func selectBar(at index: Int, animated: Bool, generateFeedback: Bool) {
+        delegate?.histogramView(self, didChangeIndex: index)
         moveTag(toBarViewAt: index, animated: animated, generateFeedback: generateFeedback)
         highlightBarView(at: index, animated: animated)
     }
