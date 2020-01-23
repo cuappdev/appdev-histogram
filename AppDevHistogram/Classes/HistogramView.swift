@@ -17,9 +17,6 @@ public protocol HistogramViewDataSource: AnyObject {
     func numberOfDataPointsPerTickMark(for histogramView: HistogramView) -> Int?
     func histogramView(_ histogramView: HistogramView, titleForTickMarkAt index: Int) -> String?
 
-    func defaultBarColor(for histogramView: HistogramView) -> UIColor
-    func highlightedBarColor(for histogramView: HistogramView) -> UIColor
-    func font(for histogramView: HistogramView) -> UIFont
 }
 
 public protocol HistogramViewDelegate: AnyObject {
@@ -49,6 +46,24 @@ public class HistogramView: UIView {
     private let tagDropDownView = UIView()
 
     private let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+
+    public var defaultBarColor: UIColor = .lightGray {
+        didSet {
+            reloadData()
+        }
+    }
+
+    public var highlightedBarColor: UIColor = .darkGray {
+        didSet {
+            reloadData()
+        }
+    }
+
+    public var font: UIFont? {
+        didSet {
+            reloadData()
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -145,8 +160,6 @@ public class HistogramView: UIView {
             let barContainerView = BarContainerView()
 
             let heightFactor = dataSource.histogramView(self, relativeValueOfDataPointAt: i)
-            let defaultBarColor = dataSource.defaultBarColor(for: self)
-            let highlightedBarColor = dataSource.highlightedBarColor(for: self)
             barContainerView.configure(heightFactor: heightFactor, defaultColor: defaultBarColor, highlightedColor: highlightedBarColor)
 
             addSubview(barContainerView)
@@ -182,7 +195,7 @@ public class HistogramView: UIView {
 
         for (i, barContainerView) in barContainerViews.enumerated() where i % pointsPerTick == 0 {
             let tickLabel = TickLabelView()
-            tickLabel.configure(for: dataSource.font(for: self))
+            tickLabel.configure(for: font)
             let title = dataSource.histogramView(self, titleForTickMarkAt: i) ?? ""
             tickLabel.configure(title: title)
 
@@ -211,6 +224,9 @@ public class HistogramView: UIView {
             }
 
         case .ended, .cancelled, .failed, .possible:
+            break
+
+        @unknown default:
             break
         }
     }
@@ -403,7 +419,7 @@ private class TickLabelView: UIView {
         }
     }
 
-    func configure(for font: UIFont) {
+    func configure(for font: UIFont?) {
         titleLabel.font = font
     }
 
