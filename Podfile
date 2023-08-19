@@ -7,6 +7,6 @@ target 'AppDevHistogram' do
   platform :ios, '11.0'
 
   # Pods for AppDevHistogram
-  pod 'SnapKit', '~> 4.2.0'
+  pod 'SnapKit'
 
 end

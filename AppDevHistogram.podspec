@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "AppDevHistogram"
-  spec.version      = "1.0.0"
+  spec.version      = "1.0.1"
   spec.summary      = "A reusable histogram view."
 
   # This description is used to generate tags and improve search results.
@@ -94,7 +94,7 @@ Pod::Spec.new do |spec|
   spec.static_framework = true
 
   spec.framework = "UIKit"
-  spec.dependency 'SnapKit', '~> 4.2.0'
+  spec.dependency 'SnapKit'
 
   # spec.public_header_files = "Classes/**/*.h"
 

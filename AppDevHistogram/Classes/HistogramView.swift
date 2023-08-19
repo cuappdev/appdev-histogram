@@ -284,7 +284,7 @@ public class HistogramView: UIView {
 
             self.tagView.snp.remakeConstraints { make in
                 make.top.equalToSuperview().inset(2)
-                make.centerX.equalTo(self.barContainerViews[index]).priorityMedium()
+                make.centerX.equalTo(self.barContainerViews[index]).priority(.medium)
                 make.leading.greaterThanOrEqualTo(self.barsLayoutGuide)
                 make.trailing.lessThanOrEqualTo(self.barsLayoutGuide)
             }
